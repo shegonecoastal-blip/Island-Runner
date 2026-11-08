@@ -2,471 +2,65 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Island Runner | Texada Shopping & Delivery</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#176b72">
+<title>Island Runner | Shop Powell River, Deliver to Texada</title>
 <style>
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f1f7f5;
-  color: #183f42;
-}
-
-header {
-  background: #176b72;
-  color: white;
-  text-align: center;
-  padding: 45px 20px;
-}
-
-h1 {
-  font-size: 44px;
-  margin: 10px 0;
-}
-
-h2 {
-  font-size: 28px;
-}
-
-p {
-  line-height: 1.6;
-}
-
-.subtitle {
-  font-size: 20px;
-}
-
-nav {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  background: #124f55;
-  padding: 12px;
-}
-
-nav a {
-  color: white;
-  padding: 12px 18px;
-  font-weight: bold;
-  text-decoration: none;
-}
-
-section {
-  max-width: 1000px;
-  margin: auto;
-  padding: 35px 20px;
-  text-align: center;
-}
-
-.card {
-  background: white;
-  border-radius: 18px;
-  padding: 28px;
-  margin: 18px auto;
-  box-shadow: 0 4px 12px rgba(0,0,0,.08);
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
-  gap: 18px;
-}
-
-button, .button {
-  display: inline-block;
-  background: #f4bb48;
-  color: #183f42;
-  border: none;
-  border-radius: 12px;
-  padding: 15px 24px;
-  margin: 8px 3px;
-  font-size: 18px;
-  font-weight: bold;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-button:hover, .button:hover {
-  background: #ffd477;
-}
-
-input, select, textarea {
-  display: block;
-  width: 100%;
-  max-width: 500px;
-  margin: 12px auto;
-  padding: 15px;
-  border: 2px solid #aac7c6;
-  border-radius: 10px;
-  font-size: 18px;
-  font-family: Arial, sans-serif;
-}
-
-label {
-  display: block;
-  margin-top: 15px;
-  font-weight: bold;
-}
-
-.scout {
-  background: #fff4d8;
-  border-radius: 20px;
-}
-
-.small {
-  font-size: 14px;
-  color: #526b6c;
-}
-
-footer {
-  background: #183f42;
-  color: white;
-  padding: 25px;
-  text-align: center;
-}
-
-#requestResult {
-  white-space: pre-wrap;
-  text-align: left;
-  background: #fff;
-  padding: 20px;
-  border-radius: 12px;
-  overflow-wrap: anywhere;
-}
-
-[hidden] {
-  display: none !important;
-}
+:root{--sea:#176b72;--dark:#173b43;--light:#f1f7f5;--gold:#f4bb48;--line:#b5ccca;--white:#fff}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--light);color:var(--dark);line-height:1.55}header{background:var(--sea);color:white;text-align:center;padding:40px 18px}header h1{font-size:clamp(2.2rem,7vw,3.4rem);margin:0}header p{font-size:1.2rem;margin:8px auto;max-width:700px}nav{background:#124f55;display:flex;justify-content:center;flex-wrap:wrap;gap:8px;padding:10px}nav a{color:white;text-decoration:none;padding:12px 15px;font-size:1.1rem;font-weight:bold}main{max-width:1040px;margin:auto}section{padding:35px 18px;text-align:center}h2{font-size:clamp(1.6rem,4vw,2rem);margin:8px 0 14px}.intro{font-size:1.14rem;max-width:750px;margin:12px auto 22px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(225px,1fr));gap:16px}.card{background:white;padding:24px;border-radius:17px;box-shadow:0 3px 11px #0001}.card h3{margin-top:0}.button,button{font-family:inherit;display:inline-block;border:0;border-radius:12px;padding:14px 20px;margin:7px 3px;background:var(--gold);color:var(--dark);font-size:1.06rem;font-weight:bold;text-decoration:none;cursor:pointer;min-height:50px}button:hover,.button:hover{background:#ffd57f}button:focus-visible,.button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #bf6a00;outline-offset:3px}.secondary{background:#e7f1ef;border:2px solid var(--sea)}.danger{background:#ffebea;color:#86392f}.muted{color:#4c666a;font-size:.94rem}.note{background:#fff4d8;padding:15px;border-radius:12px;margin:18px auto;max-width:760px}.field{text-align:left;max-width:640px;margin:14px auto}.field label{font-weight:bold;display:block;margin-bottom:6px}input,select,textarea{font:inherit;border:2px solid var(--line);border-radius:10px;padding:13px;width:100%;background:white;color:var(--dark)}.trip{background:white;border-radius:18px;padding:20px;max-width:780px;margin:20px auto;box-shadow:0 3px 11px #0001;text-align:left}.trip h3{margin:0 0 12px}.trip .field{margin:10px 0;max-width:none}.price-box{background:#e9f4f1;border:2px solid #c1dfd9;border-radius:14px;text-align:left;padding:22px;max-width:780px;margin:24px auto}.price-line{display:flex;justify-content:space-between;gap:15px;border-bottom:1px solid #b9d5d1;padding:9px 0}.price-line strong{white-space:nowrap}.total{font-size:1.35rem;font-weight:bold}.review{background:#fff;border-radius:15px;padding:22px;margin:18px auto;max-width:780px;text-align:left}.review pre{font:inherit;white-space:pre-wrap;overflow-wrap:anywhere;margin:0}.scout{background:#fff4d8;border-radius:22px}.scout .field{max-width:540px}.links{display:flex;justify-content:center;flex-wrap:wrap;gap:8px}.links a{margin:4px}footer{background:var(--dark);color:#fff;padding:28px 18px;text-align:center}[hidden]{display:none!important}@media(max-width:500px){.trip{padding:15px}.price-box{padding:15px}section{padding:28px 14px}}
 </style>
 </head>
-
 <body>
-
-<header>
-  <div style="font-size:55px">⛴️🛒</div>
-  <h1>Island Runner</h1>
-  <p class="subtitle">
-    Your mainland shopping connection.
-  </p>
-  <p>
-    Shop Powell River. We bring it home to Texada.
-  </p>
-</header>
-
-<nav>
-  <a href="#stores">🛒 Shop</a>
-  <a href="#scout">🦊 Scout</a>
-  <a href="#delivery">📦 Delivery</a>
-</nav>
-
-<section>
-  <h2>Welcome, Texada!</h2>
-  <p>
-    Skip the ferry trip. Shop your favourite
-    Powell River retailers and let Island Runner
-    handle pickup and delivery.
-  </p>
-
-  <div class="grid">
-
-    <div class="card">
-      <h2>🛒 Shop</h2>
-      <p>Find your favourite stores.</p>
-      <a class="button" href="#stores">
-        Shop Powell River
-      </a>
-    </div>
-
-    <div class="card">
-      <h2>🦊 Scout</h2>
-      <p>Find products and compare shopping options.</p>
-      <a class="button" href="#scout">
-        Ask Scout
-      </a>
-    </div>
-
-    <div class="card">
-      <h2>📦 Delivery</h2>
-      <p>Already placed your order?</p>
-      <a class="button" href="#delivery">
-        Book My Delivery
-      </a>
-    </div>
-
-  </div>
+<header><div aria-hidden="true" style="font-size:3rem">⛴️ 🛒</div><h1>Island Runner</h1><p>Shop Powell River. We bring it home to Texada.</p><p>One shopping trip. Multiple stores. One island delivery.</p></header>
+<nav aria-label="Main navigation"><a href="#start">Start Shopping</a><a href="#scout">Ask Scout 🦊</a><a href="#trip">My Pickups 📦</a></nav>
+<main>
+<section id="start">
+<h2>Welcome, Texada!</h2><p class="intro">Shop and pay directly with your favourite retailers. Then organize all your pickups in one easy Island Runner request.</p>
+<div class="grid">
+<div class="card"><h3>🛒 1. Shop the stores</h3><p>Order and pay with the retailers themselves. Choose store pickup where available.</p><a class="button" href="#stores">Choose a Store</a></div>
+<div class="card"><h3>🦊 2. Ask Scout</h3><p>Search for an item across stores. Compare options before you buy.</p><a class="button" href="#scout">Search with Scout</a></div>
+<div class="card"><h3>📦 3. Arrange delivery</h3><p>Add each store pickup to your trip and review the example delivery fee.</p><a class="button" href="#trip">Build My Trip</a></div>
+</div>
+<div class="note"><strong>Make the most of your run!</strong> Combine your weekly groceries, household items and other purchases into one island delivery. A single low-cost item often isn't worth a dedicated pickup.</div>
 </section>
-
-<section id="stores">
-
-  <h2>🛒 Shop Powell River</h2>
-
-  <p>
-    Choose a retailer to shop directly on its website.
-    Pay the retailer directly and select pickup where available.
-  </p>
-
-  <div class="grid">
-
-    <div class="card">
-      <h2>🔨 Canadian Tire</h2>
-      <p>Hardware, household goods and more.</p>
-      <a class="button"
-         href="https://www.canadiantire.ca"
-         target="_blank" rel="noopener">
-        Visit Store
-      </a>
-    </div>
-
-    <div class="card">
-      <h2>🛍️ Walmart</h2>
-      <p>Browse Walmart products and online ordering options.</p>
-      <a class="button"
-         href="https://www.walmart.ca"
-         target="_blank" rel="noopener">
-        Visit Store
-      </a>
-    </div>
-
-    <div class="card">
-      <h2>🥦 Groceries</h2>
-      <p>Explore grocery shopping and pickup options.</p>
-      <a class="button"
-         href="https://www.saveonfoods.com"
-         target="_blank" rel="noopener">
-        Visit Save-On-Foods
-      </a>
-    </div>
-
-  </div>
-
-  <p class="small">
-    Retailer links are provided for convenience.
-    Local pickup availability must be confirmed with each store.
-  </p>
-
+<section id="stores"><h2>🛍️ Shop Powell River</h2><p>These links take you to retailer websites. Confirm the store location and pickup options before ordering.</p>
+<div class="grid"><div class="card"><h3>🔨 Canadian Tire</h3><p>Tools, home and outdoor supplies</p><a class="button" href="https://www.canadiantire.ca/" target="_blank" rel="noopener noreferrer">Visit Canadian Tire ↗</a></div><div class="card"><h3>🛒 Walmart</h3><p>Groceries and everyday essentials</p><a class="button" href="https://www.walmart.ca/" target="_blank" rel="noopener noreferrer">Visit Walmart ↗</a></div><div class="card"><h3>🥦 Save-On-Foods</h3><p>Groceries and household essentials</p><a class="button" href="https://www.saveonfoods.com/" target="_blank" rel="noopener noreferrer">Visit Save-On-Foods ↗</a></div></div>
+<p class="muted">Links are for browsing; retailer pickup availability and eligibility are not guaranteed. Island Runner is not affiliated with these retailers.</p>
 </section>
-
-<section id="scout" class="scout">
-
-  <h2>🦊 Meet Scout!</h2>
-
-  <p>
-    Your friendly shopping sidekick.
-  </p>
-
-  <p>
-    Looking for something?
-    Tell Scout what you need.
-  </p>
-
-  <label for="productSearch">
-    What are you shopping for?
-  </label>
-
-  <input
-    id="productSearch"
-    type="search"
-    placeholder="Example: coffee maker"
-  >
-
-  <button onclick="findProducts()">
-    🔎 Find My Item
-  </button>
-
-  <div id="scoutResults" hidden>
-    <h3>Let's see who has it!</h3>
-    <p>Open these searches to compare prices:</p>
-    <div id="scoutLinks"></div>
-    <p class="small">
-      Scout does not yet retrieve live prices.
-      Always check the retailer's price and pickup availability.
-    </p>
-  </div>
-
+<section id="scout" class="scout"><h2>🦊 Meet Scout</h2><p class="intro">Looking for an item? Scout opens retailer searches so you can compare options yourself.</p><div class="field"><label for="itemSearch">What are you shopping for?</label><input id="itemSearch" type="search" placeholder="For example: 10 kg flour"></div><button type="button" id="searchBtn">🔎 Find My Item</button><div id="scoutResult" hidden><h3>Compare your options</h3><div id="scoutLinks" class="links"></div><p class="muted">Scout does not yet display live prices. Check the retailer's current price, local stock and pickup availability.</p></div></section>
+<section id="trip"><h2>📦 My Shopping Pickups</h2><p class="intro">Already placed and paid for your orders? Add each pickup below. You can include several stores in one delivery.</p>
+<div class="note"><strong>Demo only:</strong> This form prepares a request you can copy. It does <strong>not</strong> send or confirm a booking, and no payment is taken.</div>
+<div id="pickupList"></div><button type="button" id="addPickup">➕ Add Another Pickup</button>
+<div class="price-box" aria-live="polite"><h3 style="margin-top:0">Your estimated delivery fee</h3><div class="price-line"><span>First pickup location</span><strong id="firstFee">$20.00</strong></div><div class="price-line"><span>Additional pickup locations (<span id="extraCount">0</span> × $5)</span><strong id="extraFee">$0.00</strong></div><div class="price-line total"><span>Example delivery total</span><strong id="deliveryTotal">$20.00</strong></div><p class="muted">Illustrative pricing only: $20 for the first pickup location, plus $5 per additional pickup location. Final pricing, delivery availability, oversized items and extra handling are not confirmed. Retailer purchases are paid separately and are not included above.</p></div>
+<div class="card" style="max-width:780px;margin:22px auto"><h3>Where are we delivering?</h3><div class="field"><label for="customerName">Your name *</label><input id="customerName" autocomplete="name" placeholder="Full name"></div><div class="field"><label for="customerPhone">Phone number *</label><input id="customerPhone" type="tel" autocomplete="tel" placeholder="Your contact number"></div><div class="field"><label for="deliveryArea">Texada delivery area *</label><select id="deliveryArea"><option value="">Choose an area</option><option>Van Anda</option><option>Gillies Bay</option><option>Other Texada location</option></select></div><div class="field"><label for="deliveryNotes">Delivery notes (optional)</label><textarea id="deliveryNotes" rows="3" placeholder="Any helpful delivery instructions? Do not include private access codes."></textarea></div><button type="button" id="reviewButton">Review My Trip</button></div>
+<div class="review" id="reviewBox" hidden><h3>Your trip summary</h3><pre id="reviewText"></pre><button type="button" id="copyButton">📋 Copy My Request</button><p id="copyMessage" role="status"></p><p class="muted"><strong>Not a confirmed booking.</strong> Copying this text does not send it to Island Runner. Please don't include passwords, card numbers or retailer login details.</p></div>
 </section>
-
-<section id="delivery">
-
-  <h2>📦 Arrange Your Delivery</h2>
-
-  <p>
-    Already ordered and paid at a store?
-    Prepare your Island Runner pickup request here.
-  </p>
-
-  <div class="card">
-
-    <label for="customerName">Your Name</label>
-    <input id="customerName" placeholder="Full name">
-
-    <label for="customerPhone">Phone Number</label>
-    <input id="customerPhone" type="tel"
-           placeholder="Your contact number">
-
-    <label for="storeName">Pickup Store</label>
-    <select id="storeName">
-      <option value="">Choose a store</option>
-      <option>Canadian Tire</option>
-      <option>Walmart</option>
-      <option>Save-On-Foods</option>
-      <option>Another store</option>
-      <option>Multiple stores</option>
-    </select>
-
-    <label for="orderDetails">
-      Order Numbers and Pickup Details
-    </label>
-    <textarea id="orderDetails" rows="4"
-      placeholder="Store names, order numbers and any pickup instructions"></textarea>
-
-    <label for="deliveryArea">Texada Delivery Area</label>
-    <select id="deliveryArea">
-      <option value="">Choose your area</option>
-      <option>Van Anda</option>
-      <option>Gillies Bay</option>
-      <option>Other Texada location</option>
-    </select>
-
-    <label for="deliveryNotes">
-      Additional Notes
-    </label>
-    <textarea id="deliveryNotes" rows="3"
-      placeholder="Anything else we should know?"></textarea>
-
-    <button onclick="createRequest()">
-      Prepare My Request
-    </button>
-
-    <div id="requestBox" hidden>
-      <h3>Your Pickup Request</h3>
-      <div id="requestResult"></div>
-      <button onclick="copyRequest()">
-        📋 Copy Request
-      </button>
-      <p id="copyStatus" aria-live="polite"></p>
-      <p class="small">
-        Demo only. Copying does not send or confirm a booking.
-        Do not include passwords or payment information.
-      </p>
-    </div>
-
-  </div>
-
-</section>
-
-<section>
-  <h2>❤️ Made for Island Life</h2>
-
-  <p>
-    Less time on the ferry.
-    More time enjoying Texada.
-  </p>
-
-  <p>
-    One island. One shopping connection.
-  </p>
-</section>
-
-<footer>
-  <p>⛴️ Island Runner | Texada Island, BC</p>
-  <p>Made with ❤️ for our island community.</p>
-  <p>Website prototype — bookings not yet open.</p>
-</footer>
-
+<section><h2>❤️ Made for Island Life</h2><p>Less time on the ferry. More time enjoying Texada.</p></section>
+</main>
+<footer><p>⛴️ Island Runner | Texada Island, BC</p><p>Website prototype — bookings are not yet open.</p></footer>
 <script>
-
-function findProducts() {
-  const product = document
-    .getElementById("productSearch").value.trim();
-
-  if (!product) {
-    alert("Tell Scout what you're looking for!");
-    return;
-  }
-
-  const links = [
-    {
-      name: "Canadian Tire",
-      url: "https://www.canadiantire.ca/en/search-results.html?q="
-        + encodeURIComponent(product)
-    },
-    {
-      name: "Walmart",
-      url: "https://www.walmart.ca/search?q="
-        + encodeURIComponent(product)
-    },
-    {
-      name: "Google Shopping",
-      url: "https://www.google.com/search?tbm=shop&q="
-        + encodeURIComponent(product)
-    }
-  ];
-
-  const container = document.getElementById("scoutLinks");
-  container.replaceChildren();
-
-  links.forEach(store => {
-    const a = document.createElement("a");
-    a.className = "button";
-    a.href = store.url;
-    a.target = "_blank";
-    a.rel = "noopener";
-    a.textContent = "Search " + store.name;
-    container.appendChild(a);
-  });
-
-  document.getElementById("scoutResults").hidden = false;
-}
-
-let currentRequest = "";
-
-function createRequest() {
-  const name = document.getElementById("customerName").value.trim();
-  const phone = document.getElementById("customerPhone").value.trim();
-  const store = document.getElementById("storeName").value;
-  const details = document.getElementById("orderDetails").value.trim();
-  const area = document.getElementById("deliveryArea").value;
-  const notes = document.getElementById("deliveryNotes").value.trim();
-
-  if (!name || !phone || !store || !details || !area) {
-    alert("Please complete the required pickup information.");
-    return;
-  }
-
-  currentRequest =
-    "ISLAND RUNNER PICKUP REQUEST\n\n" +
-    "Name: " + name + "\n" +
-    "Phone: " + phone + "\n" +
-    "Store: " + store + "\n" +
-    "Order Details: " + details + "\n" +
-    "Texada Area: " + area + "\n" +
-    "Notes: " + (notes || "None");
-
-  document.getElementById("requestResult").textContent =
-    currentRequest;
-
-  document.getElementById("requestBox").hidden = false;
-  document.getElementById("copyStatus").textContent = "";
-}
-
-async function copyRequest() {
-  try {
-    await navigator.clipboard.writeText(currentRequest);
-    document.getElementById("copyStatus").textContent =
-      "Copied! Save this request for when bookings open.";
-  } catch (error) {
-    document.getElementById("copyStatus").textContent =
-      "Please select and copy the request text above.";
-  }
-}
-
+(function(){
+  'use strict';
+  const list=document.getElementById('pickupList');
+  const add=document.getElementById('addPickup');
+  const reviewBox=document.getElementById('reviewBox');
+  let nextId=0;
+  let summary='';
+  function money(n){return '$'+n.toFixed(2);}
+  function rows(){return Array.from(list.querySelectorAll('.trip'));}
+  function updatePrice(){const count=rows().length;const extras=Math.max(0,count-1);document.getElementById('extraCount').textContent=extras;document.getElementById('extraFee').textContent=money(extras*5);document.getElementById('deliveryTotal').textContent=money(count?20+extras*5:0);document.getElementById('firstFee').textContent=count?'$20.00':'$0.00';}
+  function invalidateReview(){reviewBox.hidden=true;summary='';}
+  function addRow(){nextId++;const id=nextId;const wrap=document.createElement('div');wrap.className='trip';wrap.innerHTML=`<h3 class="pickupTitle">Pickup</h3><div class="field"><label for="store-${id}">Store *</label><select id="store-${id}" class="store"><option value="">Choose a store</option><option>Walmart</option><option>Canadian Tire</option><option>Save-On-Foods</option><option>Other store</option></select></div><div class="field"><label for="other-${id}">Store name (if Other store)</label><input id="other-${id}" class="other" placeholder="Name of store"></div><div class="field"><label for="order-${id}">Order number or pickup reference *</label><input id="order-${id}" class="order" placeholder="Your retailer order number"></div><div class="field"><label for="instructions-${id}">Pickup instructions (optional)</label><textarea id="instructions-${id}" class="instructions" rows="2" placeholder="Only include information needed for collection"></textarea></div><button type="button" class="danger remove">Remove This Pickup</button>`;
+  wrap.querySelector('.remove').addEventListener('click',()=>{if(rows().length<=1){alert('Keep at least one pickup in your trip.');return;}wrap.remove();renumber();invalidateReview();updatePrice();});
+  wrap.addEventListener('input',invalidateReview);wrap.addEventListener('change',invalidateReview);list.appendChild(wrap);renumber();updatePrice();}
+  function renumber(){rows().forEach((el,i)=>{el.querySelector('.pickupTitle').textContent='Pickup '+(i+1);});}
+  add.addEventListener('click',()=>{addRow();rows().at(-1).querySelector('.store').focus();});
+  document.querySelectorAll('#customerName,#customerPhone,#deliveryArea,#deliveryNotes').forEach(e=>{e.addEventListener('input',invalidateReview);e.addEventListener('change',invalidateReview);});
+  document.getElementById('searchBtn').addEventListener('click',()=>{const query=document.getElementById('itemSearch').value.trim();if(!query){alert('Tell Scout what you are looking for!');return;}const stores=[['Canadian Tire','https://www.canadiantire.ca/en/search-results.html?q='],['Walmart','https://www.walmart.ca/search?q='],['Google Shopping','https://www.google.com/search?tbm=shop&q=']];const result=document.getElementById('scoutLinks');result.replaceChildren();stores.forEach(([name,url])=>{const a=document.createElement('a');a.className='button';a.href=url+encodeURIComponent(query);a.target='_blank';a.rel='noopener noreferrer';a.textContent='Search '+name+' ↗';result.appendChild(a);});document.getElementById('scoutResult').hidden=false;});
+  document.getElementById('reviewButton').addEventListener('click',()=>{const name=document.getElementById('customerName').value.trim();const phone=document.getElementById('customerPhone').value.trim();const area=document.getElementById('deliveryArea').value;const notes=document.getElementById('deliveryNotes').value.trim();if(!name||!phone||!area){alert('Please enter your name, phone number and delivery area.');return;}const pickupEntries=[];for(const [i,row] of rows().entries()){const store=row.querySelector('.store').value;const other=row.querySelector('.other').value.trim();const order=row.querySelector('.order').value.trim();const instructions=row.querySelector('.instructions').value.trim();if(!store||(store==='Other store'&&!other)||!order){alert('Please complete the store and order reference for pickup '+(i+1)+'.');return;}pickupEntries.push({store:store==='Other store'?other:store,order,instructions});}const cost=20+(pickupEntries.length-1)*5;summary='ISLAND RUNNER — DEMO PICKUP REQUEST\nNOT SUBMITTED / NOT CONFIRMED\n\nName: '+name+'\nPhone: '+phone+'\nDelivery area: '+area+'\n\n'+pickupEntries.map((x,i)=>'Pickup '+(i+1)+': '+x.store+'\nOrder reference: '+x.order+'\nPickup notes: '+(x.instructions||'None')).join('\n\n')+'\n\nDelivery notes: '+(notes||'None')+'\nExample delivery fee: '+money(cost)+'\n(Retail purchases paid directly to stores; demo fee not final.)';document.getElementById('reviewText').textContent=summary;document.getElementById('copyMessage').textContent='';reviewBox.hidden=false;reviewBox.scrollIntoView({behavior:'smooth',block:'start'});});
+  document.getElementById('copyButton').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(summary);document.getElementById('copyMessage').textContent='Copied! This is still only a demo; no request has been sent.';}catch(e){document.getElementById('copyMessage').textContent='Copy unavailable. Select the summary text above and copy it manually.';}});
+  addRow();
+})();
 </script>
-
 </body>
 </html>
