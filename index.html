@@ -9,12 +9,62 @@
 :root{--sea:#176b72;--dark:#173b43;--light:#f1f7f5;--gold:#f4bb48;--line:#b5ccca;--white:#fff}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--light);color:var(--dark);line-height:1.55}header{background:var(--sea);color:white;text-align:center;padding:40px 18px}header h1{font-size:clamp(2.2rem,7vw,3.4rem);margin:0}header p{font-size:1.2rem;margin:8px auto;max-width:700px}nav{background:#124f55;display:flex;justify-content:center;flex-wrap:wrap;gap:8px;padding:10px}nav a{color:white;text-decoration:none;padding:12px 15px;font-size:1.1rem;font-weight:bold}main{max-width:1040px;margin:auto}section{padding:35px 18px;text-align:center}h2{font-size:clamp(1.6rem,4vw,2rem);margin:8px 0 14px}.intro{font-size:1.14rem;max-width:750px;margin:12px auto 22px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(225px,1fr));gap:16px}.card{background:white;padding:24px;border-radius:17px;box-shadow:0 3px 11px #0001}.card h3{margin-top:0}.button,button{font-family:inherit;display:inline-block;border:0;border-radius:12px;padding:14px 20px;margin:7px 3px;background:var(--gold);color:var(--dark);font-size:1.06rem;font-weight:bold;text-decoration:none;cursor:pointer;min-height:50px}button:hover,.button:hover{background:#ffd57f}button:focus-visible,.button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #bf6a00;outline-offset:3px}.secondary{background:#e7f1ef;border:2px solid var(--sea)}.danger{background:#ffebea;color:#86392f}.muted{color:#4c666a;font-size:.94rem}.note{background:#fff4d8;padding:15px;border-radius:12px;margin:18px auto;max-width:760px}.field{text-align:left;max-width:640px;margin:14px auto}.field label{font-weight:bold;display:block;margin-bottom:6px}input,select,textarea{font:inherit;border:2px solid var(--line);border-radius:10px;padding:13px;width:100%;background:white;color:var(--dark)}.trip{background:white;border-radius:18px;padding:20px;max-width:780px;margin:20px auto;box-shadow:0 3px 11px #0001;text-align:left}.trip h3{margin:0 0 12px}.trip .field{margin:10px 0;max-width:none}.price-box{background:#e9f4f1;border:2px solid #c1dfd9;border-radius:14px;text-align:left;padding:22px;max-width:780px;margin:24px auto}.price-line{display:flex;justify-content:space-between;gap:15px;border-bottom:1px solid #b9d5d1;padding:9px 0}.price-line strong{white-space:nowrap}.total{font-size:1.35rem;font-weight:bold}.review{background:#fff;border-radius:15px;padding:22px;margin:18px auto;max-width:780px;text-align:left}.review pre{font:inherit;white-space:pre-wrap;overflow-wrap:anywhere;margin:0}.scout{background:#fff4d8;border-radius:22px}.scout .field{max-width:540px}.links{display:flex;justify-content:center;flex-wrap:wrap;gap:8px}.links a{margin:4px}footer{background:var(--dark);color:#fff;padding:28px 18px;text-align:center}[hidden]{display:none!important}@media(max-width:500px){.trip{padding:15px}.price-box{padding:15px}section{padding:28px 14px}}
 </style>
+<style>
+.scout-search-form{max-width:680px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:end;text-align:left}
+.scout-search-form .field{width:100%;max-width:none;margin:0}
+.scout-search-form .field .muted{margin:6px 0 0}
+.scout-search-form button{margin:0 0 1px;white-space:nowrap}
+.scout-status{min-height:1.55em;margin:16px auto}
+.scout-results{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:14px;max-width:900px;margin:18px auto;text-align:left}
+.scout-product{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;overflow-wrap:anywhere}
+.scout-product h4{font-size:1.1rem;margin:0 0 10px}
+.scout-product p{margin:7px 0}
+.scout-product .demo-price-label{display:inline-block;background:#e9f4f1;border-radius:8px;padding:7px 9px;font-weight:bold}
+.scout-cart-summary{display:flex;align-items:center;justify-content:space-between;gap:14px;max-width:680px;margin:18px auto;padding:14px 16px;background:#fff;border:1px solid var(--line);border-radius:14px;text-align:left}
+.scout-cart-summary p{margin:3px 0}
+.scout-cart-summary button{flex:none}
+.cart-feedback{max-width:680px;margin:8px auto;padding:8px 12px;background:#e9f4f1;border-left:3px solid var(--sea);border-radius:6px;text-align:left}
+.cart-review{background:#f1f7f5;text-align:left}
+.cart-review-inner{max-width:850px;margin:0 auto}
+.cart-review-heading{text-align:center}
+.cart-review-heading:focus{outline:3px solid #bf6a00;outline-offset:4px}
+.cart-review-summary{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin:18px 0}
+.cart-retailer{margin:18px 0;background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}
+.cart-retailer h3{margin:0 0 12px}
+.cart-line{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px 18px;padding:14px 0;border-top:1px solid var(--line)}
+.cart-line:first-of-type{border-top:0}
+.cart-line h4{margin:0 0 4px;font-size:1.05rem}
+.cart-line p{margin:4px 0}
+.cart-line-total{text-align:right;align-self:center;font-weight:bold;white-space:nowrap}
+.cart-line-actions{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.cart-line-actions button{margin:0;min-width:46px;padding:10px 14px}
+.cart-quantity{min-width:2ch;text-align:center;font-weight:bold}
+.cart-empty{background:#fff;border-radius:14px;padding:24px;text-align:center}
+.cart-empty h3{margin-top:0}
+.cart-review-status{min-height:1.55em;color:var(--dark)}
+@media(max-width:520px){.cart-review-summary{flex-direction:column;gap:4px}.cart-retailer{padding:14px}.cart-line{grid-template-columns:1fr}.cart-line-total{text-align:left}}
+@media(max-width:520px){.scout-search-form{grid-template-columns:1fr}.scout-search-form button{width:100%;min-height:50px}.scout-results{grid-template-columns:1fr}}
+@media(max-width:420px){.scout-cart-summary{align-items:flex-start;flex-direction:column}.scout-cart-summary button{width:100%;min-height:50px;margin:4px 0 0}}
+.store-browse{margin:24px 18px;padding:12px 18px;background:#fff;border:1px solid var(--line);border-radius:14px;text-align:left}
+.store-browse summary{cursor:pointer;font-size:1.1rem;font-weight:700;padding:8px 0;min-height:44px}
+.store-browse summary:focus-visible{outline:3px solid #bf6a00;outline-offset:3px}
+.store-browse .grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,225px),1fr));margin:12px 0}
+@media(max-width:500px){.store-browse{margin:20px 14px;padding:10px 14px}}
+.customer-faq{margin:20px 18px 32px;background:#fff;border:1px solid var(--line);border-radius:16px;text-align:left}
+.customer-faq h2{text-align:center}
+.customer-faq-intro{text-align:center;max-width:720px;margin:0 auto 18px}
+.customer-faq details{max-width:820px;margin:0 auto;border-top:1px solid var(--line)}
+.customer-faq summary{min-height:48px;padding:13px 8px;cursor:pointer;font-weight:700}
+.customer-faq summary:focus-visible{outline:3px solid #bf6a00;outline-offset:2px;border-radius:4px}
+.customer-faq details p{margin:0;padding:0 8px 16px;max-width:780px}
+@media(max-width:500px){.customer-faq{margin:18px 14px 24px;padding:24px 14px}.customer-faq summary{padding:12px 6px}.customer-faq details p{padding:0 6px 15px}}
+</style>
 </head>
 <body>
 <header><div aria-hidden="true" style="font-size:3rem">⛴️ 🛒</div><h1>Island Runner</h1><p>Shop Powell River. We bring it home to Texada.</p><p>One shopping trip. Multiple stores. One island delivery.</p></header>
-<nav aria-label="Main navigation"><a href="#start">Start Shopping</a><a href="#scout">Ask Scout 🦊</a><a href="#trip">My Pickups 📦</a><a href="#booking">Request Delivery ↗</a></nav>
+<nav aria-label="Main navigation"><a href="#scout">Ask Scout</a><a href="#stores">Browse Stores</a><a href="#start" hidden>Start Shopping</a><a href="#trip" hidden>My Pickups</a><a href="#booking" hidden>Request Delivery</a></nav>
 <main>
-<section id="start">
+<section id="start" hidden>
 <h2>Welcome, Texada!</h2><p class="intro">Shop and pay directly with your favourite retailers. Then organize all your pickups in one easy Island Runner request.</p>
 <div class="grid">
 <div class="card"><h3>🛒 1. Shop the stores</h3><p>Order and pay with the retailers themselves. Choose store pickup where available.</p><a class="button" href="#stores">Choose a Store</a></div>
@@ -24,27 +74,41 @@
 <p><a class="button" href="#booking">📦 Send a Delivery Request</a></p>
 <div class="note"><strong>Make the most of your run!</strong> Combine your weekly groceries, household items and other purchases into one island delivery. A single low-cost item often isn't worth a dedicated pickup.</div>
 </section>
-<section id="stores"><h2>🛍️ Shop Powell River</h2><p>These links take you to retailer websites. Confirm the store location and pickup options before ordering.</p>
+<section id="scout" class="scout"><h2>Ask Scout</h2><p class="intro">Tell Scout what you're shopping for. We'll hunt down the best deals in Powell River!</p><p class="intro">Compare prices, pick your favourites, and build your cart.</p><p class="muted">Scout searches a demonstration catalogue only. All DEMO PRICES are fictional examples, not live retailer prices or availability.</p><form id="scoutSearchForm" class="scout-search-form" role="search" aria-label="Search demonstration products"><div class="field"><label for="itemSearch">What are you shopping for?</label><input id="itemSearch" type="search" placeholder="Try flour, dog food, or hardware" autocomplete="off" aria-describedby="scoutSearchHint"><p class="muted" id="scoutSearchHint">Search by product, size, retailer, or category.</p></div><button type="submit" id="searchBtn">Search catalogue</button></form><div class="scout-cart-summary" id="cartSummary" role="region" aria-label="Shopping cart summary"><div><p><strong>Cart:</strong> <span id="cartItemCount">0 items</span></p><p>Estimated DEMO product subtotal: <strong id="cartSubtotal">$0.00</strong></p></div><button type="button" id="viewCartButton" aria-expanded="false" aria-controls="cartReview">View Cart</button></div><p id="cartFeedback" class="cart-feedback" role="status" aria-live="polite" aria-atomic="true" hidden></p><p id="scoutStatus" class="muted scout-status" role="status" aria-live="polite" aria-atomic="true"></p><div id="scoutResult" hidden><h3>Product options</h3><div id="scoutResults" class="scout-results" aria-label="Scout product options"></div></div></section>
+<section id="cartReview" class="cart-review" aria-labelledby="cartReviewHeading" hidden><div class="cart-review-inner"><h2 id="cartReviewHeading" class="cart-review-heading" tabindex="-1">Review your cart</h2><p class="muted cart-review-heading">All listed prices are DEMO PRICES for demonstration only.</p><div class="cart-review-summary" aria-label="Cart totals"><p><strong>Items:</strong> <span id="reviewItemCount">0 items</span></p><p><strong>Estimated DEMO product subtotal:</strong> <span id="reviewSubtotal">$0.00</span></p></div><p id="cartReviewStatus" class="cart-review-status" role="status" aria-live="polite" aria-atomic="true"></p><div id="cartReviewItems"></div><div id="cartEmpty" class="cart-empty" hidden><h3>Your cart is empty</h3><p>Search with Scout and add the products you want.</p></div><button type="button" class="secondary continue-shopping">Continue Shopping</button></div></section>
+<details id="stores" class="store-browse"><summary>Prefer to browse yourself? Explore the stores.</summary><p>These links take you to retailer websites. Confirm the store location and pickup options before ordering.</p>
 <div class="grid"><div class="card"><h3>🔨 Canadian Tire</h3><p>Tools, home and outdoor supplies</p><a class="button" href="https://www.canadiantire.ca/" target="_blank" rel="noopener noreferrer">Visit Canadian Tire ↗</a></div><div class="card"><h3>🛒 Walmart</h3><p>Groceries and everyday essentials</p><a class="button" href="https://www.walmart.ca/" target="_blank" rel="noopener noreferrer">Visit Walmart ↗</a></div><div class="card"><h3>🥦 Save-On-Foods</h3><p>Groceries and household essentials</p><a class="button" href="https://www.saveonfoods.com/" target="_blank" rel="noopener noreferrer">Visit Save-On-Foods ↗</a></div></div>
 <p class="muted">Links are for browsing; retailer pickup availability and eligibility are not guaranteed. Island Runner is not affiliated with these retailers.</p>
-</section>
-<section id="scout" class="scout"><h2>🦊 Meet Scout</h2><p class="intro">Looking for an item? Scout opens retailer searches so you can compare options yourself.</p><div class="field"><label for="itemSearch">What are you shopping for?</label><input id="itemSearch" type="search" placeholder="For example: 10 kg flour"></div><button type="button" id="searchBtn">🔎 Find My Item</button><div id="scoutResult" hidden><h3>Compare your options</h3><div id="scoutLinks" class="links"></div><p class="muted">Scout does not yet display live prices. Check the retailer's current price, local stock and pickup availability.</p></div></section>
-<section id="trip"><h2>📦 My Shopping Pickups</h2><p class="intro">Already placed and paid for your orders? Add each pickup below. You can include several stores in one delivery.</p>
+</details>
+<section id="trip" hidden><h2>📦 My Shopping Pickups</h2><p class="intro">Already placed and paid for your orders? Add each pickup below. You can include several stores in one delivery.</p>
 <div class="note"><strong>Step 1:</strong> Build your trip and review it. <strong>Step 2:</strong> Continue to the prefilled booking form to confirm and send your request. The final fee is subject to confirmation.</div>
 <div id="pickupList"></div><button type="button" id="addPickup">➕ Add Another Pickup</button><p class="muted">The current form accepts up to three store pickups. The first two will transfer automatically; for a third store, please complete its fields on the next screen.</p>
 <div class="price-box" aria-live="polite"><h3 style="margin-top:0">Your estimated delivery fee</h3><div class="price-line"><span>First pickup location</span><strong id="firstFee">$20.00</strong></div><div class="price-line"><span>Additional pickup locations (<span id="extraCount">0</span> × $5)</span><strong id="extraFee">$0.00</strong></div><div class="price-line total"><span>Example delivery total</span><strong id="deliveryTotal">$20.00</strong></div><p class="muted">Illustrative pricing only: $20 for the first pickup location, plus $5 per additional pickup location. Final pricing, delivery availability, oversized items and extra handling are not confirmed. Retailer purchases are paid separately and are not included above.</p></div>
 <div class="card" style="max-width:780px;margin:22px auto"><h3>Where are we delivering?</h3><div class="field"><label for="customerName">Your name *</label><input id="customerName" autocomplete="name" placeholder="Full name"></div><div class="field"><label for="customerPhone">Phone number *</label><input id="customerPhone" type="tel" autocomplete="tel" placeholder="Your contact number"></div><div class="field"><label for="deliveryArea">Texada delivery area *</label><select id="deliveryArea"><option value="">Choose an area</option><option>Van Anda</option><option>Gillies Bay</option><option>Blubber Bay</option><option>Shelter Point</option><option>Other Texada location</option></select></div><div class="field"><label for="deliveryAddress">Delivery address or meeting point *</label><input id="deliveryAddress" autocomplete="street-address" placeholder="Where should we meet or deliver?"></div><div class="field"><label for="preferredDate">Preferred delivery date *</label><input id="preferredDate" type="date"></div><div class="field"><label for="customerEmail">Email (optional)</label><input id="customerEmail" type="email" autocomplete="email" placeholder="You can add this on the next screen"></div><div class="field"><label for="deliveryNotes">Delivery notes (optional)</label><textarea id="deliveryNotes" rows="3" placeholder="Any helpful delivery instructions? Do not include private access codes."></textarea></div><button type="button" id="reviewButton">Review My Trip</button></div>
 <div class="review" id="reviewBox" hidden><h3>Your trip summary</h3><pre id="reviewText"></pre><button type="button" id="continueButton">✅ Continue to Booking Form ↗</button><button type="button" class="secondary" id="copyButton">📋 Copy Summary</button><p id="copyMessage" role="status"></p><p class="muted"><strong>Not yet submitted:</strong> On the next screen, review your prefilled answers, fill any remaining required fields, agree to the acknowledgment, then press Submit. No payment is taken here.</p></div>
 </section>
-<section id="booking" style="background:#e9f4f1;border-top:2px solid #c1dfd9">
+<section id="booking" hidden style="background:#e9f4f1;border-top:2px solid #c1dfd9">
 <h2>📨 Send Your Delivery Request</h2>
 <p class="intro">Prefer to skip the trip builder? Open the booking form directly. Otherwise, use <strong>Review My Trip → Continue to Booking Form</strong> above to carry over most of your details.</p>
 <a class="button" href="https://docs.google.com/forms/d/e/1FAIpQLSeOcidDyVi-qA61uMn6n9A66s06N7J-wbLzli-sBcz9QZ5WGw/viewform" target="_blank" rel="noopener noreferrer">Open Island Runner Booking Form ↗</a>
 <p class="muted">This direct link opens a blank form. From the trip summary above, customer details and the first two pickups are prefilled. Submission is a request, not a confirmed booking.</p>
 </section>
 <section><h2>❤️ Made for Island Life</h2><p>Less time on the ferry. More time enjoying Texada.</p></section>
+<section class="customer-faq" aria-labelledby="faqHeading"><h2 id="faqHeading">Questions? Scout's got answers! 🦊</h2><p class="muted customer-faq-intro">These answers describe the planned shopping service. This prototype uses demonstration prices and does not accept real orders or payments.</p>
+<details><summary>How does Island Runner work?</summary><p>Choose products with Scout. An operator reviews your order and confirms your final quote. Once you approve it and pay by e-Transfer, Island Runner shops for you and delivers across Texada.</p></details>
+<details><summary>When do you shop?</summary><p>We shop in Powell River every Thursday.</p></details>
+<details><summary>When is the order deadline?</summary><p>Submit your order by Wednesday at 6 p.m. Pacific Time for the Thursday shop.</p></details>
+<details><summary>How and when do I pay?</summary><p>First, review and approve your final quote. Then pay Island Runner by e-Transfer by Wednesday at 10 p.m. Pacific Time, before we shop.</p></details>
+<details><summary>When will my shopping arrive?</summary><p>Thursday home delivery across Texada is targeted for around 6 p.m. Arrival time may vary.</p></details>
+<details><summary>Where do you deliver?</summary><p>We deliver to homes across Texada Island.</p></details>
+<details><summary>What happens if something is unavailable?</summary><p>We skip unavailable items and refund the amount for those items. We do not replace them with something else.</p></details>
+<details><summary>Do you offer substitutions?</summary><p>No. We never substitute products.</p></details>
+<details><summary>What happens if prices change?</summary><p>Scout's current prices are demonstrations, not live prices. For the planned service, prices may change before purchase. You approve a final quote first, and may choose to authorize an optional 5% product-price buffer. Any unused prepaid funds are refunded.</p></details>
+<details><summary>What happens if only part of my order is available?</summary><p>Unavailable items are skipped and refunded. If at least one item is delivered, the full agreed delivery fee applies. If the entire order is unavailable, we refund the full amount, including delivery.</p></details>
+<details><summary>Are Scout's prices guaranteed?</summary><p>No. Current Scout prices are fictional demonstration prices, not verified live retailer prices or guaranteed purchase prices.</p></details>
+</section>
 </main>
-<footer><p>⛴️ Island Runner | Texada Island, BC</p><p>Delivery requests are accepted for review; no booking is confirmed until Island Runner contacts you.</p></footer>
+<footer><p>⛴️ Island Runner | Texada Island, BC</p><p hidden>Delivery requests are accepted for review; no booking is confirmed until Island Runner contacts you.</p></footer>
 <script>
 (function(){
   'use strict';
@@ -63,7 +127,199 @@
   function renumber(){rows().forEach((el,i)=>{el.querySelector('.pickupTitle').textContent='Pickup '+(i+1);});}
   add.addEventListener('click',()=>{addRow();rows().at(-1).querySelector('.store').focus();});
   document.querySelectorAll('#customerName,#customerPhone,#deliveryArea,#deliveryAddress,#preferredDate,#customerEmail,#deliveryNotes').forEach(e=>{e.addEventListener('input',invalidateReview);e.addEventListener('change',invalidateReview);});
-  document.getElementById('searchBtn').addEventListener('click',()=>{const query=document.getElementById('itemSearch').value.trim();if(!query){alert('Tell Scout what you are looking for!');return;}const stores=[['Canadian Tire','https://www.canadiantire.ca/en/search-results.html?q='],['Walmart','https://www.walmart.ca/search?q='],['Google Shopping','https://www.google.com/search?tbm=shop&q=']];const result=document.getElementById('scoutLinks');result.replaceChildren();stores.forEach(([name,url])=>{const a=document.createElement('a');a.className='button';a.href=url+encodeURIComponent(query);a.target='_blank';a.rel='noopener noreferrer';a.textContent='Search '+name+' ↗';result.appendChild(a);});document.getElementById('scoutResult').hidden=false;});
+  const catalogue=[
+    {name:'All-Purpose Flour',size:'2.5 kg',retailer:'Save-On-Foods',category:'Groceries',price:5.99,terms:'baking pantry wheat'},
+    {name:'All-Purpose Flour',size:'10 kg',retailer:'Walmart',category:'Groceries',price:17.49,terms:'baking pantry wheat bulk'},
+    {name:'Rolled Oats',size:'1 kg',retailer:'Walmart',category:'Groceries',price:4.99,terms:'breakfast cereal baking'},
+    {name:'Large Eggs',size:'12 eggs',retailer:'Save-On-Foods',category:'Groceries',price:6.49,terms:'dozen baking breakfast'},
+    {name:'Long-Grain Rice',size:'2 kg',retailer:'Walmart',category:'Groceries',price:7.99,terms:'pantry dinner'},
+    {name:'Laundry Detergent',size:'1.8 L',retailer:'Walmart',category:'Household essentials',price:9.49,terms:'cleaning laundry'},
+    {name:'Laundry Detergent',size:'2.5 L',retailer:'Save-On-Foods',category:'Household essentials',price:12.99,terms:'cleaning laundry'},
+    {name:'Dish Soap',size:'650 mL',retailer:'Walmart',category:'Household essentials',price:3.79,terms:'cleaning kitchen dishwashing'},
+    {name:'Toilet Paper',size:'12 rolls',retailer:'Save-On-Foods',category:'Household essentials',price:11.99,terms:'bathroom tissue'},
+    {name:'Paper Towels',size:'6 rolls',retailer:'Walmart',category:'Household essentials',price:9.99,terms:'kitchen cleaning'},
+    {name:'Adult Dog Food, Chicken',size:'2 kg',retailer:'Walmart',category:'Pet supplies',price:12.99,terms:'dog food dry kibble chicken'},
+    {name:'Adult Dog Food, Chicken',size:'5 kg',retailer:'Canadian Tire',category:'Pet supplies',price:24.99,terms:'dog food dry kibble chicken'},
+    {name:'Clumping Cat Litter',size:'10 kg',retailer:'Canadian Tire',category:'Pet supplies',price:13.99,terms:'cat litter kitty'},
+    {name:'Adult Cat Food, Salmon',size:'1.8 kg',retailer:'Save-On-Foods',category:'Pet supplies',price:10.49,terms:'cat food dry kibble salmon'},
+    {name:'Beef Dog Treats',size:'500 g',retailer:'Walmart',category:'Pet supplies',price:7.99,terms:'dog treats snacks beef'},
+    {name:'Soft-White LED Bulbs',size:'2 bulbs',retailer:'Canadian Tire',category:'Hardware',price:8.99,terms:'light lighting home'},
+    {name:'Deck Screws',size:'1 lb, 3 in',retailer:'Canadian Tire',category:'Hardware',price:9.49,terms:'fasteners wood building construction'},
+    {name:'Claw Hammer',size:'16 oz',retailer:'Canadian Tire',category:'Hardware',price:15.99,terms:'tool tools repair'},
+    {name:'Indoor Extension Cord',size:'25 ft',retailer:'Walmart',category:'Hardware',price:18.99,terms:'electrical power cable'},
+    {name:'Garden Hose',size:'50 ft',retailer:'Canadian Tire',category:'Hardware',price:29.99,terms:'outdoor watering yard'},
+  ];
+  const searchForm=document.getElementById('scoutSearchForm');
+  const searchInput=document.getElementById('itemSearch');
+  const scoutResults=document.getElementById('scoutResults');
+  const scoutResult=document.getElementById('scoutResult');
+  const scoutStatus=document.getElementById('scoutStatus');
+  const cart=[];
+  const cartItemCount=document.getElementById('cartItemCount');
+  const cartSubtotal=document.getElementById('cartSubtotal');
+  const reviewItemCount=document.getElementById('reviewItemCount');
+  const reviewSubtotal=document.getElementById('reviewSubtotal');
+  const cartReviewItems=document.getElementById('cartReviewItems');
+  const cartEmpty=document.getElementById('cartEmpty');
+  const cartReview=document.getElementById('cartReview');
+  const scoutSection=document.getElementById('scout');
+  const cartReviewHeading=document.getElementById('cartReviewHeading');
+  const cartReviewStatus=document.getElementById('cartReviewStatus');
+  const viewCartButton=document.getElementById('viewCartButton');
+  const cartFeedback=document.getElementById('cartFeedback');
+  function cartQuantity(){return cart.reduce((total,item)=>total+item.quantity,0);}
+  function cartTotal(){return cart.reduce((total,item)=>total+item.product.price*item.quantity,0);}
+  function updateCart(focusTarget){
+    const count=cartQuantity();
+    const subtotal=cartTotal();
+    const countLabel=count+' '+(count===1?'item':'items');
+    const subtotalLabel='$'+subtotal.toFixed(2);
+    cartItemCount.textContent=countLabel;
+    cartSubtotal.textContent=subtotalLabel;
+    reviewItemCount.textContent=countLabel;
+    reviewSubtotal.textContent=subtotalLabel;
+    cartReviewItems.replaceChildren();
+    cartEmpty.hidden=count!==0;
+    const retailers=new Map();
+    cart.forEach((item,index)=>{
+      const group=retailers.get(item.product.retailer)||[];
+      group.push({item,index});
+      retailers.set(item.product.retailer,group);
+    });
+    Array.from(retailers.entries()).sort(([a],[b])=>a.localeCompare(b)).forEach(([retailer,items])=>{
+      const group=document.createElement('section');
+      group.className='cart-retailer';
+      const heading=document.createElement('h3');
+      heading.textContent=retailer;
+      group.appendChild(heading);
+      items.forEach(({item,index})=>{
+        const product=item.product;
+        const line=document.createElement('article');
+        line.className='cart-line';
+        const details=document.createElement('div');
+        const name=document.createElement('h4');
+        name.textContent=product.name;
+        const size=document.createElement('p');
+        size.textContent='Size: '+product.size;
+        const retailerLabel=document.createElement('p');
+        retailerLabel.textContent='Retailer: '+product.retailer;
+        const price=document.createElement('p');
+        price.textContent='DEMO PRICE: $'+product.price.toFixed(2)+' each';
+        details.append(name,size,retailerLabel,price);
+        const lineTotal=document.createElement('p');
+        lineTotal.className='cart-line-total';
+        lineTotal.textContent='Line total: $'+(product.price*item.quantity).toFixed(2);
+        const actions=document.createElement('div');
+        actions.className='cart-line-actions';
+        actions.setAttribute('aria-label','Quantity and removal controls for '+product.name+', '+product.size);
+        const decrement=document.createElement('button');
+        decrement.type='button';
+        decrement.className='secondary';
+        decrement.textContent='−';
+        decrement.setAttribute('aria-label','Decrease quantity of '+product.name+', '+product.size);
+        decrement.dataset.cartItem=String(index);
+        decrement.dataset.cartAction='decrease';
+        decrement.disabled=item.quantity<=1;
+        decrement.addEventListener('click',()=>changeQuantity(index,-1,'decrease'));
+        const quantity=document.createElement('span');
+        quantity.className='cart-quantity';
+        quantity.setAttribute('aria-label','Quantity');
+        quantity.textContent='Quantity: '+item.quantity;
+        const increment=document.createElement('button');
+        increment.type='button';
+        increment.className='secondary';
+        increment.textContent='+';
+        increment.setAttribute('aria-label','Increase quantity of '+product.name+', '+product.size);
+        increment.dataset.cartItem=String(index);
+        increment.dataset.cartAction='increase';
+        increment.addEventListener('click',()=>changeQuantity(index,1,'increase'));
+        const remove=document.createElement('button');
+        remove.type='button';
+        remove.className='danger';
+        remove.textContent='Remove';
+        remove.setAttribute('aria-label','Remove '+product.name+', '+product.size+' from cart');
+        remove.dataset.cartItem=String(index);
+        remove.dataset.cartAction='remove';
+        remove.addEventListener('click',()=>removeFromCart(index));
+        actions.append(decrement,quantity,increment,remove);
+        line.append(details,lineTotal,actions);
+        group.appendChild(line);
+      });
+      cartReviewItems.appendChild(group);
+    });
+    if(focusTarget){
+      const target=cartReviewItems.querySelector(`[data-cart-item="${focusTarget.index}"][data-cart-action="${focusTarget.action}"]`);
+      if(target)target.focus();else cartReviewHeading.focus();
+    }
+  }
+  function changeQuantity(index,change,action){
+    const item=cart[index];
+    if(!item)return;
+    item.quantity+=change;
+    updateCart({index,action:action==='decrease'&&item.quantity===1?'increase':action});
+    cartReviewStatus.textContent=`${item.product.name} quantity is now ${item.quantity}. Estimated DEMO product subtotal: $${cartTotal().toFixed(2)}.`;
+  }
+  function removeFromCart(index){
+    const [removed]=cart.splice(index,1);
+    if(!removed)return;
+    updateCart({index:Math.min(index,cart.length-1),action:'increase'});
+    cartReviewStatus.textContent=`${removed.product.name} removed. Cart has ${cartQuantity()} ${cartQuantity()===1?'item':'items'}. Estimated DEMO product subtotal: $${cartTotal().toFixed(2)}.`;
+  }
+  function addToCart(product){
+    let item=cart.find(entry=>entry.product===product);
+    if(item){item.quantity+=1;}else{item={product,quantity:1};cart.push(item);}
+    updateCart();
+    const confirmation=item.quantity===1?`${product.name} added to your cart.`:`Quantity for ${product.name} increased to ${item.quantity}.`;
+    cartFeedback.textContent=`${confirmation} Cart: ${cartQuantity()} ${cartQuantity()===1?'item':'items'}. Estimated DEMO product subtotal: $${cartTotal().toFixed(2)}.`;
+    cartFeedback.hidden=false;
+  }
+  viewCartButton.addEventListener('click',()=>{
+    cartFeedback.hidden=true;
+    updateCart();
+    scoutSection.hidden=true;
+    cartReview.hidden=false;
+    viewCartButton.setAttribute('aria-expanded','true');
+    cartReviewHeading.focus();
+  });
+  document.querySelectorAll('.continue-shopping').forEach(button=>button.addEventListener('click',()=>{
+    cartReview.hidden=true;
+    scoutSection.hidden=false;
+    viewCartButton.setAttribute('aria-expanded','false');
+    document.getElementById('itemSearch').focus();
+  }));
+  updateCart();
+  function normalize(value){return value.toLocaleLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,' ').trim();}
+  function renderScoutResults(matches){
+    scoutResults.replaceChildren();
+    matches.forEach(product=>{
+      const card=document.createElement('article');
+      card.className='scout-product';
+      const title=document.createElement('h4');title.textContent=product.name;
+      const size=document.createElement('p');size.textContent='Size: '+product.size;
+      const retailer=document.createElement('p');retailer.textContent='Retailer: '+product.retailer;
+      const category=document.createElement('p');category.className='muted';category.textContent=product.category;
+      const price=document.createElement('p');price.className='demo-price-label';price.textContent='DEMO PRICE: $'+product.price.toFixed(2);
+      const addButton=document.createElement('button');addButton.type='button';addButton.className='secondary scout-add-button';addButton.textContent='Add to Cart';addButton.setAttribute('aria-label',`Add ${product.name}, ${product.size}, from ${product.retailer} to cart`);addButton.addEventListener('click',()=>addToCart(product));
+      card.append(title,size,retailer,category,price,addButton);
+      scoutResults.appendChild(card);
+    });
+    scoutResult.hidden=matches.length===0;
+  }
+  searchForm.addEventListener('submit',event=>{
+    event.preventDefault();
+    const query=normalize(searchInput.value);
+    if(!query){renderScoutResults([]);scoutStatus.textContent='Enter a product, size, retailer, or category to search the demonstration catalogue.';searchInput.focus();return;}
+    const words=query.split(/\s+/).filter(Boolean);
+    const matches=catalogue.map((product,index)=>{
+      const name=normalize(product.name),size=normalize(product.size),retailer=normalize(product.retailer);
+      const searchable=normalize([product.name,product.size,product.retailer,product.category,product.terms].join(' '));
+      if(!words.every(word=>searchable.includes(word)))return null;
+      const score=words.reduce((total,word)=>total+(name.includes(word)?5:0)+(size.includes(word)?3:0)+(retailer.includes(word)?2:0)+1,0)+(name.includes(query)?10:0);
+      return {product,index,score};
+    }).filter(Boolean).sort((a,b)=>b.score-a.score||a.index-b.index).slice(0,3).map(match=>match.product);
+    renderScoutResults(matches);
+    scoutStatus.textContent=matches.length?`${matches.length} demonstration ${matches.length===1?'option':'options'} found. Prices are for demonstration only.`:`No demonstration products matched “${searchInput.value.trim()}”. Try another product or category.`;
+  });
   document.getElementById('reviewButton').addEventListener('click',()=>{const name=document.getElementById('customerName').value.trim();const phone=document.getElementById('customerPhone').value.trim();const area=document.getElementById('deliveryArea').value;const notes=document.getElementById('deliveryNotes').value.trim();const address=document.getElementById('deliveryAddress').value.trim();const date=document.getElementById('preferredDate').value; if(!name||!phone||!area||!address||!date){alert('Please enter your name, phone, delivery area, delivery address and preferred date.');return;}const pickupEntries=[];for(const [i,row] of rows().entries()){const store=row.querySelector('.store').value;const other=row.querySelector('.other').value.trim();const order=row.querySelector('.order').value.trim();const instructions=row.querySelector('.instructions').value.trim();if(!store||(store==='Other store'&&!other)||!order){alert('Please complete the store and order reference for pickup '+(i+1)+'.');return;}pickupEntries.push({store:store==='Other store'?other:store,order,instructions});}const cost=20+(pickupEntries.length-1)*5;window.islandRunnerEntries=pickupEntries;summary='ISLAND RUNNER — PICKUP REQUEST\nNOT YET SUBMITTED / NOT CONFIRMED\n\nName: '+name+'\nPhone: '+phone+'\nDelivery area: '+area+'\n\n'+pickupEntries.map((x,i)=>'Pickup '+(i+1)+': '+x.store+'\nOrder reference: '+x.order+'\nPickup notes: '+(x.instructions||'None')).join('\n\n')+'\n\nDelivery notes: '+(notes||'None')+'\nExample delivery fee: '+money(cost)+'\n(Retail purchases paid directly to stores; demo fee not final.)';document.getElementById('reviewText').textContent=summary;document.getElementById('copyMessage').textContent='';reviewBox.hidden=false;reviewBox.scrollIntoView({behavior:'smooth',block:'start'});});
   document.getElementById('continueButton').addEventListener('click',()=>{
     const entries=window.islandRunnerEntries;
