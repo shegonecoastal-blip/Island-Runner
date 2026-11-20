@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#176b72">
+<title>Island Runner | Try the Pickup and Delivery Demo</title>
+<style>
+:root{--sea:#176b72;--dark:#173b43;--light:#f1f7f5;--gold:#f4bb48;--line:#b5ccca;--white:#fff}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--light);color:var(--dark);line-height:1.55}header{background:var(--sea);color:white;text-align:center;padding:40px 18px}header h1{font-size:clamp(2.2rem,7vw,3.4rem);margin:0}header p{font-size:1.2rem;margin:8px auto;max-width:700px}nav{background:#124f55;display:flex;justify-content:center;flex-wrap:wrap;gap:8px;padding:10px}nav a{color:white;text-decoration:none;padding:12px 15px;font-size:1.1rem;font-weight:bold}main{max-width:1040px;margin:auto}section{padding:35px 18px;text-align:center}h2{font-size:clamp(1.6rem,4vw,2rem);margin:8px 0 14px}.intro{font-size:1.14rem;max-width:750px;margin:12px auto 22px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(225px,1fr));gap:16px}.card{background:white;padding:24px;border-radius:17px;box-shadow:0 3px 11px #0001}.card h3{margin-top:0}.button,button{font-family:inherit;display:inline-block;border:0;border-radius:12px;padding:14px 20px;margin:7px 3px;background:var(--gold);color:var(--dark);font-size:1.06rem;font-weight:bold;text-decoration:none;cursor:pointer;min-height:50px}button:hover,.button:hover{background:#ffd57f}button:focus-visible,.button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #bf6a00;outline-offset:3px}.secondary{background:#e7f1ef;border:2px solid var(--sea)}.danger{background:#ffebea;color:#86392f}.muted{color:#4c666a;font-size:.94rem}.note{background:#fff4d8;padding:15px;border-radius:12px;margin:18px auto;max-width:760px}.field{text-align:left;max-width:640px;margin:14px auto}.field label{font-weight:bold;display:block;margin-bottom:6px}input,select,textarea{font:inherit;border:2px solid var(--line);border-radius:10px;padding:13px;width:100%;background:white;color:var(--dark)}.trip{background:white;border-radius:18px;padding:20px;max-width:780px;margin:20px auto;box-shadow:0 3px 11px #0001;text-align:left}.trip h3{margin:0 0 12px}.trip .field{margin:10px 0;max-width:none}.price-box{background:#e9f4f1;border:2px solid #c1dfd9;border-radius:14px;text-align:left;padding:22px;max-width:780px;margin:24px auto}.price-line{display:flex;justify-content:space-between;gap:15px;border-bottom:1px solid #b9d5d1;padding:9px 0}.price-line strong{white-space:nowrap}.total{font-size:1.35rem;font-weight:bold}.review{background:#fff;border-radius:15px;padding:22px;margin:18px auto;max-width:780px;text-align:left}.review pre{font:inherit;white-space:pre-wrap;overflow-wrap:anywhere;margin:0}.scout{background:#fff4d8;border-radius:22px}.scout .field{max-width:540px}.links{display:flex;justify-content:center;flex-wrap:wrap;gap:8px}.links a{margin:4px}footer{background:var(--dark);color:#fff;padding:28px 18px;text-align:center}[hidden]{display:none!important}@media(max-width:500px){.trip{padding:15px}.price-box{padding:15px}section{padding:28px 14px}}
+</style>
+<style>
+.scout-search-form{max-width:680px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:end;text-align:left}
+.scout-search-form .field{width:100%;max-width:none;margin:0}
+.scout-search-form .field .muted{margin:6px 0 0}
+.scout-search-form button{margin:0 0 1px;white-space:nowrap}
+.scout-status{min-height:1.55em;margin:16px auto}
+.scout-results{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:14px;max-width:900px;margin:18px auto;text-align:left}
+.scout-product{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;overflow-wrap:anywhere}
+.scout-product h4{font-size:1.1rem;margin:0 0 10px}
+.scout-product p{margin:7px 0}
+.scout-product .demo-price-label{display:inline-block;background:#e9f4f1;border-radius:8px;padding:7px 9px;font-weight:bold}
+.linked-product-card{max-width:680px;margin:18px auto;padding:18px;background:#fff;border:2px solid var(--sea);border-radius:14px;text-align:left}
+.linked-product-card h3{margin:0 0 8px}
+.linked-product-card .field{margin:12px 0;max-width:none}
+.linked-product-meta{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:8px 0}
+.price-pending{display:inline-block;padding:6px 9px;border-radius:8px;background:#fff4d8;font-weight:bold}
+.cart-incomplete{max-width:680px;margin:4px auto 14px;text-align:left}
+.cart-line-url{overflow-wrap:anywhere}
+.linked-product-url{display:block;overflow-wrap:anywhere;margin:8px 0}
+.scout-cart-summary{display:flex;align-items:center;justify-content:space-between;gap:14px;max-width:680px;margin:18px auto;padding:14px 16px;background:#fff;border:1px solid var(--line);border-radius:14px;text-align:left}
+.scout-cart-summary p{margin:3px 0}
+.scout-cart-summary button{flex:none}
+.cart-feedback{max-width:680px;margin:8px auto;padding:8px 12px;background:#e9f4f1;border-left:3px solid var(--sea);border-radius:6px;text-align:left}
+.cart-review{background:#f1f7f5;text-align:left}
+.cart-review-inner{max-width:850px;margin:0 auto}
+.cart-review-heading{text-align:center}
+.cart-review-heading:focus{outline:3px solid #bf6a00;outline-offset:4px}
+.cart-review-summary{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin:18px 0}
+.cart-retailer{margin:18px 0;background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}
+.cart-retailer h3{margin:0 0 12px}
+.cart-line{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px 18px;padding:14px 0;border-top:1px solid var(--line)}
+.cart-line:first-of-type{border-top:0}
+.cart-line h4{margin:0 0 4px;font-size:1.05rem}
+.cart-line p{margin:4px 0}
+.cart-line-total{text-align:right;align-self:center;font-weight:bold;white-space:nowrap}
+.cart-line-actions{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.cart-line-actions button{margin:0;min-width:46px;padding:10px 14px}
+.cart-quantity{min-width:2ch;text-align:center;font-weight:bold}
+.cart-empty{background:#fff;border-radius:14px;padding:24px;text-align:center}
+.cart-empty h3{margin-top:0}
+.cart-review-status{min-height:1.55em;color:var(--dark)}
+@media(max-width:520px){.cart-review-summary{flex-direction:column;gap:4px}.cart-retailer{padding:14px}.cart-line{grid-template-columns:1fr}.cart-line-total{text-align:left}}
+@media(max-width:520px){.scout-search-form{grid-template-columns:1fr}.scout-search-form button{width:100%;min-height:50px}.scout-results{grid-template-columns:1fr}}
+@media(max-width:420px){.scout-cart-summary{align-items:flex-start;flex-direction:column}.scout-cart-summary button{width:100%;min-height:50px;margin:4px 0 0}}
+.store-browse{margin:24px 18px;padding:12px 18px;background:#fff;border:1px solid var(--line);border-radius:14px;text-align:left}
+.store-browse summary{cursor:pointer;font-size:1.1rem;font-weight:700;padding:8px 0;min-height:44px}
+.store-browse summary:focus-visible{outline:3px solid #bf6a00;outline-offset:3px}
+.store-browse .grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,225px),1fr));margin:12px 0}
+@media(max-width:500px){.store-browse{margin:20px 14px;padding:10px 14px}}
+.customer-faq{margin:20px 18px 32px;background:#fff;border:1px solid var(--line);border-radius:16px;text-align:left}
+.customer-faq h2{text-align:center}
+.customer-faq-intro{text-align:center;max-width:720px;margin:0 auto 18px}
+.customer-faq details{max-width:820px;margin:0 auto;border-top:1px solid var(--line)}
+.customer-faq summary{min-height:48px;padding:13px 8px;cursor:pointer;font-weight:700}
+.customer-faq summary:focus-visible{outline:3px solid #bf6a00;outline-offset:2px;border-radius:4px}
+.customer-faq details p{margin:0;padding:0 8px 16px;max-width:780px}
+@media(max-width:500px){.customer-faq{margin:18px 14px 24px;padding:24px 14px}.customer-faq summary{padding:12px 6px}.customer-faq details p{padding:0 6px 15px}}
+.hero{padding:38px 18px;background:#fff;text-align:center;border-bottom:1px solid var(--line)}
+.hero-inner{max-width:820px;margin:0 auto}
+.hero h2{font-size:clamp(1.9rem,5vw,2.6rem)}
+.hero .button{font-size:1.2rem;padding:16px 25px}
+.demo-banner{max-width:850px;margin:0 auto 22px;background:#fff4d8;border:2px solid #efd48f;border-radius:14px;padding:14px 18px;text-align:left}
+.demo-banner strong{display:block;margin-bottom:3px}
+.service-grid{max-width:900px;margin:18px auto}
+.fee-card{background:#e9f4f1;border:2px solid #c1dfd9}
+.fee-card strong{font-size:1.2rem}
+.demo-label{display:inline-block;margin:8px 0;padding:6px 10px;border-radius:8px;background:#fff4d8;font-weight:bold}
+.section-note{max-width:760px;margin:10px auto}
+.scout{scroll-margin-top:14px}
+.scout-product{min-height:100%}
+.status-label{font-weight:bold}
+@media(max-width:520px){.hero{padding:30px 14px}.hero .button{display:block;width:100%;max-width:360px;margin:16px auto}.service-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><div aria-hidden="true" style="font-size:3rem">⛴️ 📦</div><h1>Island Runner</h1><p>Pickup and delivery to Texada Island</p></header>
+<nav aria-label="Main navigation"><a href="#how-it-works">How it works</a><a href="#scout-demo">Try the Demo</a><a href="#demo-retailers">Sample retailers</a><a href="#questions">Questions</a></nav>
+<main>
+<section class="hero" aria-labelledby="welcomeHeading"><div class="hero-inner"><p class="demo-label">A fictional shopping demonstration</p><h2 id="welcomeHeading">See how pickup and delivery could work</h2><p class="intro">Explore sample products, compare demonstration prices, and try the cart. No order or delivery request will be sent.</p><a class="button" href="#scout-demo">Try the Demo</a></div></section>
+<section id="how-it-works" aria-labelledby="howHeading"><h2 id="howHeading">Simple pickup and delivery</h2><p class="intro">Island Runner collects retailer orders in Powell River and delivers them to Texada. Customers always buy and pay retailers directly.</p>
+<div class="grid service-grid"><article class="card"><h3>1. Shop directly</h3><p>Choose and pay for your items with each retailer. Select store pickup when ordering.</p></article><article class="card"><h3>2. Request a pickup</h3><p>Share your retailer pickup confirmations together. Island Runner will review the arrangements and contact you before accepting the request.</p></article><article class="card"><h3>3. We deliver</h3><p>Collection in Powell River is Thursday, 12:30–4:30 p.m. Texada deliveries begin around 6:30 p.m.</p></article></div>
+<div class="card fee-card"><h3>Delivery fee</h3><p><strong>$20 for the first retailer pickup, plus $5 for each additional pickup.</strong></p><p class="muted">This delivery fee is separate from the merchandise you purchase and pay for directly through retailers.</p></div>
+<p class="note"><strong>A request is not a confirmed booking.</strong> Island Runner must contact you to confirm the pickup and delivery arrangements.</p></section>
+<section id="scout-demo" class="scout" aria-labelledby="scoutHeading"><h2 id="scoutHeading">Try Scout's sample catalogue</h2><p class="intro">Search example grocery, household, pet, and hardware items. Add a sample product, change its quantity, and review the demonstration subtotal.</p><div class="demo-banner"><strong>Demo information only</strong>Products and prices below are fictional examples. Retailer inventory, current prices, pickup availability, and Powell River store stock have not been checked. The cart does not place orders or send delivery requests.</div><form id="scoutSearchForm" class="scout-search-form" role="search" aria-label="Search sample products or add a retailer product link"><div class="field"><label for="itemSearch">What sample product would you like to find?</label><input id="itemSearch" type="search" placeholder="Try flour, oats, dog food, or screws" autocomplete="off" aria-describedby="scoutSearchHint"><p class="muted" id="scoutSearchHint">This search uses the sample catalogue on this page. It does not check retailer websites.</p></div><button type="submit" id="searchBtn">Search Samples</button></form><div class="scout-cart-summary" id="cartSummary" role="region" aria-label="Demonstration cart summary"><div><p><strong>Demo cart:</strong> <span id="cartItemCount">0 items</span></p><p>Estimated demo merchandise subtotal: <strong id="cartSubtotal">$0.00</strong></p></div><button type="button" id="viewCartButton" aria-expanded="false" aria-controls="cartReview">Review Demo Cart</button></div><p id="cartPendingNote" class="muted cart-incomplete" hidden>Products with pending prices are not included in this subtotal. No retailer prices have been verified.</p><p id="cartFeedback" class="cart-feedback" role="status" aria-live="polite" aria-atomic="true" hidden></p><p id="scoutStatus" class="muted scout-status" role="status" aria-live="polite" aria-atomic="true"></p><section id="linkedProductCard" class="linked-product-card" aria-labelledby="linkedProductHeading" hidden><h3 id="linkedProductHeading">Add a product reference to your demo cart</h3><p>The product and price are not verified. Enter a sample product name and quantity to see how a pending-price item appears.</p><div class="linked-product-meta"><span>Retailer: <strong id="linkedRetailer"></strong></span><span class="price-pending">Price not checked</span></div><p><a id="linkedProductUrl" class="linked-product-url" target="_blank" rel="noopener noreferrer"></a></p><form id="linkedProductForm"><div class="field"><label for="linkedProductName">Sample product name</label><input id="linkedProductName" required autocomplete="off"></div><div class="field"><label for="linkedProductQuantity">Sample quantity</label><input id="linkedProductQuantity" type="number" min="1" step="1" value="1" required inputmode="numeric"></div><button type="submit" id="linkedAddButton">Add to Demo Cart</button></form></section><div id="scoutResult" hidden><h3>Sample product options</h3><div id="scoutResults" class="scout-results" aria-label="Fictional catalogue product options"></div></div><p class="muted section-note">There is no checkout here. Your demo cart is kept only in this page while it is open.</p></section>
+<section id="cartReview" class="cart-review" aria-labelledby="cartReviewHeading" hidden><div class="cart-review-inner"><h2 id="cartReviewHeading" class="cart-review-heading" tabindex="-1">Review the demo cart</h2><p class="muted cart-review-heading">All amounts are fictional merchandise examples. Island Runner delivery fees are separate.</p><div class="cart-review-summary" aria-label="Demonstration cart totals"><p><strong>Demo items:</strong> <span id="reviewItemCount">0 items</span></p><p><strong>Estimated demo merchandise subtotal:</strong> <span id="reviewSubtotal">$0.00</span></p></div><p id="reviewPendingNote" class="muted cart-incomplete" hidden>Products with pending prices are not included in this subtotal.</p><p id="cartReviewStatus" class="cart-review-status" role="status" aria-live="polite" aria-atomic="true"></p><div id="cartReviewItems"></div><div id="cartEmpty" class="cart-empty" hidden><h3>Your demo cart is empty</h3><p>Return to the sample catalogue and add a product.</p></div><button type="button" class="secondary continue-shopping">Return to Samples</button></div></section>
+<details id="demo-retailers" class="store-browse"><summary>Which retailers appear in the sample catalogue?</summary><p>The fictional examples use retailer names to demonstrate how options might be compared. No connection to retailer products, inventory, or store pickup systems is active.</p><div class="grid"><article class="card"><h3>Walmart Canada</h3><p>Sample grocery, household, and hardware products</p></article><article class="card"><h3>Save-On-Foods</h3><p>Sample grocery and household products</p></article><article class="card"><h3>Canadian Tire</h3><p>Sample hardware and household products</p></article></div></details>
+<section class="customer-faq" id="questions" aria-labelledby="faqHeading"><h2 id="faqHeading">Questions about the demo?</h2><p class="muted customer-faq-intro">This page is for exploring a fictional example. It does not accept pickup requests or payments.</p>
+<details><summary>Does Scout show live retailer prices?</summary><p>No. Scout's products and prices on this page are fictional demonstration examples. Inventory, current prices, and local store availability have not been checked.</p></details>
+<details><summary>Does Island Runner buy my products?</summary><p>No. Customers select, purchase, and pay for merchandise directly with retailers. Island Runner collects prepared orders and delivers them to Texada.</p></details>
+<details><summary>When are orders collected and delivered?</summary><p>The planned Powell River collection window is Thursday, 12:30–4:30 p.m. Texada deliveries begin around 6:30 p.m.</p></details>
+<details><summary>How is the delivery fee calculated?</summary><p>The delivery fee is $20 for the first retailer pickup plus $5 for each additional pickup. It is separate from merchandise costs paid to retailers.</p></details>
+<details><summary>Does the demo submit a delivery request?</summary><p>No. Searching, selecting products, and using the cart only changes the sample page in your browser. No booking or customer information is sent.</p></details>
+<details><summary>When is a delivery booking confirmed?</summary><p>A request must be reviewed. Island Runner will contact the customer to confirm pickup and delivery arrangements before accepting it.</p></details>
+</section>
+</main>
+<footer><p>⛴️ Island Runner | Texada Island, BC</p><p>Fictional demonstration only — no order or delivery request is submitted.</p></footer>
+<script>
+(function(){
+  'use strict';
+  const catalogue=[
+    {name:'All-Purpose Flour',size:'2.5 kg',retailer:'Save-On-Foods',category:'Groceries',price:5.99,terms:'baking pantry wheat'},
+    {name:'All-Purpose Flour',size:'10 kg',retailer:'Walmart',category:'Groceries',price:17.49,terms:'baking pantry wheat bulk'},
+    {name:'Rolled Oats',size:'1 kg',retailer:'Walmart',category:'Groceries',price:4.99,terms:'breakfast cereal baking'},
+    {name:'Large Eggs',size:'12 eggs',retailer:'Save-On-Foods',category:'Groceries',price:6.49,terms:'dozen baking breakfast'},
+    {name:'Long-Grain Rice',size:'2 kg',retailer:'Walmart',category:'Groceries',price:7.99,terms:'pantry dinner'},
+    {name:'Laundry Detergent',size:'1.8 L',retailer:'Walmart',category:'Household essentials',price:9.49,terms:'cleaning laundry'},
+    {name:'Laundry Detergent',size:'2.5 L',retailer:'Save-On-Foods',category:'Household essentials',price:12.99,terms:'cleaning laundry'},
+    {name:'Dish Soap',size:'650 mL',retailer:'Walmart',category:'Household essentials',price:3.79,terms:'cleaning kitchen dishwashing'},
+    {name:'Toilet Paper',size:'12 rolls',retailer:'Save-On-Foods',category:'Household essentials',price:11.99,terms:'bathroom tissue'},
+    {name:'Paper Towels',size:'6 rolls',retailer:'Walmart',category:'Household essentials',price:9.99,terms:'kitchen cleaning'},
+    {name:'Adult Dog Food, Chicken',size:'2 kg',retailer:'Walmart',category:'Pet supplies',price:12.99,terms:'dog food dry kibble chicken'},
+    {name:'Adult Dog Food, Chicken',size:'5 kg',retailer:'Canadian Tire',category:'Pet supplies',price:24.99,terms:'dog food dry kibble chicken'},
+    {name:'Clumping Cat Litter',size:'10 kg',retailer:'Canadian Tire',category:'Pet supplies',price:13.99,terms:'cat litter kitty'},
+    {name:'Adult Cat Food, Salmon',size:'1.8 kg',retailer:'Save-On-Foods',category:'Pet supplies',price:10.49,terms:'cat food dry kibble salmon'},
+    {name:'Beef Dog Treats',size:'500 g',retailer:'Walmart',category:'Pet supplies',price:7.99,terms:'dog treats snacks beef'},
+    {name:'Soft-White LED Bulbs',size:'2 bulbs',retailer:'Canadian Tire',category:'Hardware',price:8.99,terms:'light lighting home'},
+    {name:'Deck Screws',size:'1 lb, 3 in',retailer:'Canadian Tire',category:'Hardware',price:9.49,terms:'fasteners wood building construction'},
+    {name:'Claw Hammer',size:'16 oz',retailer:'Canadian Tire',category:'Hardware',price:15.99,terms:'tool tools repair'},
+    {name:'Indoor Extension Cord',size:'25 ft',retailer:'Walmart',category:'Hardware',price:18.99,terms:'electrical power cable'},
+    {name:'Garden Hose',size:'50 ft',retailer:'Canadian Tire',category:'Hardware',price:29.99,terms:'outdoor watering yard'},
+  ];
+  const searchForm=document.getElementById('scoutSearchForm');
+  const searchInput=document.getElementById('itemSearch');
+  const scoutResults=document.getElementById('scoutResults');
+  const scoutResult=document.getElementById('scoutResult');
+  const scoutStatus=document.getElementById('scoutStatus');
+  const cart=[];
+  const cartItemCount=document.getElementById('cartItemCount');
+  const cartSubtotal=document.getElementById('cartSubtotal');
+  const reviewItemCount=document.getElementById('reviewItemCount');
+  const reviewSubtotal=document.getElementById('reviewSubtotal');
+  const cartReviewItems=document.getElementById('cartReviewItems');
+  const cartEmpty=document.getElementById('cartEmpty');
+  const cartReview=document.getElementById('cartReview');
+  const scoutSection=document.getElementById('scout-demo');
+  const cartReviewHeading=document.getElementById('cartReviewHeading');
+  const cartReviewStatus=document.getElementById('cartReviewStatus');
+  const viewCartButton=document.getElementById('viewCartButton');
+  const cartFeedback=document.getElementById('cartFeedback');
+  const cartPendingNote=document.getElementById('cartPendingNote');
+  const reviewPendingNote=document.getElementById('reviewPendingNote');
+  const linkedProductCard=document.getElementById('linkedProductCard');
+  const linkedProductForm=document.getElementById('linkedProductForm');
+  const linkedProductName=document.getElementById('linkedProductName');
+  const linkedProductQuantity=document.getElementById('linkedProductQuantity');
+  let pendingLinkedProduct=null;
+  function cartQuantity(){return cart.reduce((total,item)=>total+item.quantity,0);}
+  function cartTotal(){return cart.reduce((total,item)=>total+(Number.isFinite(item.product.price)?item.product.price*item.quantity:0),0);}
+  function updateCart(focusTarget){
+    const count=cartQuantity();
+    const subtotal=cartTotal();
+    const hasPendingPrices=cart.some(item=>!Number.isFinite(item.product.price));
+    const countLabel=count+' demo '+(count===1?'item':'items');
+    const subtotalLabel='$'+subtotal.toFixed(2);
+    cartItemCount.textContent=countLabel;
+    cartSubtotal.textContent=subtotalLabel;
+    reviewItemCount.textContent=countLabel;
+    reviewSubtotal.textContent=subtotalLabel;
+    cartPendingNote.hidden=!hasPendingPrices;
+    reviewPendingNote.hidden=!hasPendingPrices;
+    cartReviewItems.replaceChildren();
+    cartEmpty.hidden=count!==0;
+    const retailers=new Map();
+    cart.forEach((item,index)=>{
+      const group=retailers.get(item.product.retailer)||[];
+      group.push({item,index});
+      retailers.set(item.product.retailer,group);
+    });
+    Array.from(retailers.entries()).sort(([a],[b])=>a.localeCompare(b)).forEach(([retailer,items])=>{
+      const group=document.createElement('section');
+      group.className='cart-retailer';
+      const heading=document.createElement('h3');
+      heading.textContent=retailer;
+      group.appendChild(heading);
+      items.forEach(({item,index})=>{
+        const product=item.product;
+        const line=document.createElement('article');
+        line.className='cart-line';
+        const details=document.createElement('div');
+        const name=document.createElement('h4');
+        name.textContent=product.name;
+        const size=product.size?document.createElement('p'):null;
+        if(size)size.textContent='Size: '+product.size;
+        const retailerLabel=document.createElement('p');
+        retailerLabel.textContent='Retailer: '+product.retailer;
+        const price=document.createElement('p');
+        if(Number.isFinite(product.price))price.textContent='DEMO PRICE: $'+product.price.toFixed(2)+' each';
+        else price.textContent='Price pending';
+        details.append(name);
+        if(size)details.appendChild(size);
+        details.append(retailerLabel,price);
+        if(product.url){
+          const productLink=document.createElement('a');
+          productLink.className='cart-line-url';
+          productLink.href=product.url;
+          productLink.target='_blank';
+          productLink.rel='noopener noreferrer';
+          productLink.textContent='View retailer product page';
+          details.appendChild(productLink);
+        }
+        const lineTotal=document.createElement('p');
+        lineTotal.className='cart-line-total';
+        lineTotal.textContent=Number.isFinite(product.price)?'Line total: $'+(product.price*item.quantity).toFixed(2):'Not included in subtotal';
+        const actions=document.createElement('div');
+        actions.className='cart-line-actions';
+        const sizeLabel=product.size?', '+product.size:'';
+        actions.setAttribute('aria-label','Quantity and removal controls for '+product.name+sizeLabel);
+        const decrement=document.createElement('button');
+        decrement.type='button';
+        decrement.className='secondary';
+        decrement.textContent='−';
+        decrement.setAttribute('aria-label','Decrease quantity of '+product.name+sizeLabel);
+        decrement.dataset.cartItem=String(index);
+        decrement.dataset.cartAction='decrease';
+        decrement.disabled=item.quantity<=1;
+        decrement.addEventListener('click',()=>changeQuantity(index,-1,'decrease'));
+        const quantity=document.createElement('span');
+        quantity.className='cart-quantity';
+        quantity.setAttribute('aria-label','Quantity');
+        quantity.textContent='Quantity: '+item.quantity;
+        const increment=document.createElement('button');
+        increment.type='button';
+        increment.className='secondary';
+        increment.textContent='+';
+        increment.setAttribute('aria-label','Increase quantity of '+product.name+sizeLabel);
+        increment.dataset.cartItem=String(index);
+        increment.dataset.cartAction='increase';
+        increment.addEventListener('click',()=>changeQuantity(index,1,'increase'));
+        const remove=document.createElement('button');
+        remove.type='button';
+        remove.className='danger';
+        remove.textContent='Remove';
+        remove.setAttribute('aria-label','Remove '+product.name+sizeLabel+' from demo cart');
+        remove.dataset.cartItem=String(index);
+        remove.dataset.cartAction='remove';
+        remove.addEventListener('click',()=>removeFromCart(index));
+        actions.append(decrement,quantity,increment,remove);
+        line.append(details,lineTotal,actions);
+        group.appendChild(line);
+      });
+      cartReviewItems.appendChild(group);
+    });
+    if(focusTarget){
+      const target=cartReviewItems.querySelector(`[data-cart-item="${focusTarget.index}"][data-cart-action="${focusTarget.action}"]`);
+      if(target)target.focus();else cartReviewHeading.focus();
+    }
+  }
+  function changeQuantity(index,change,action){
+    const item=cart[index];
+    if(!item)return;
+    item.quantity+=change;
+    updateCart({index,action:action==='decrease'&&item.quantity===1?'increase':action});
+    cartReviewStatus.textContent=`${item.product.name} quantity is now ${item.quantity}. Estimated demo merchandise subtotal: $${cartTotal().toFixed(2)}.`;
+  }
+  function removeFromCart(index){
+    const [removed]=cart.splice(index,1);
+    if(!removed)return;
+    updateCart({index:Math.min(index,cart.length-1),action:'increase'});
+    cartReviewStatus.textContent=`${removed.product.name} removed. Demo cart has ${cartQuantity()} ${cartQuantity()===1?'item':'items'}. Estimated demo merchandise subtotal: $${cartTotal().toFixed(2)}.`;
+  }
+  function addToCart(product){
+    let item=cart.find(entry=>entry.product===product);
+    if(item){item.quantity+=1;}else{item={product,quantity:1};cart.push(item);}
+    updateCart();
+    const confirmation=item.quantity===1?`${product.name} added to the demo cart.`:`Demo cart quantity for ${product.name} increased to ${item.quantity}.`;
+    cartFeedback.textContent=`${confirmation} Demo cart: ${cartQuantity()} ${cartQuantity()===1?'item':'items'}. Estimated demo merchandise subtotal: $${cartTotal().toFixed(2)}.`;
+    cartFeedback.hidden=false;
+  }
+  function linkedRetailerFor(value){
+    const input=value.trim();
+    const looksLikeUrl=/^(?:https?:\/\/|www\.)/i.test(input)||/^(?:canadiantire\.ca|walmart\.ca|saveonfoods\.com)(?:\/|$)/i.test(input);
+    if(!looksLikeUrl)return {kind:'search'};
+    let parsed;
+    try{parsed=new URL(input);}catch(error){return {kind:'invalid'};}
+    if(parsed.protocol!=='https:'||parsed.username||parsed.password||parsed.port)return {kind:'invalid'};
+    const host=parsed.hostname.toLowerCase();
+    const retailers=[
+      {name:'Canadian Tire',domain:'canadiantire.ca',path:/^\/(?:en\/)?(?:pdp|product)\//i},
+      {name:'Walmart',domain:'walmart.ca',path:/^\/(?:en\/)?ip\//i},
+      {name:'Save-On-Foods',domain:'saveonfoods.com',path:/^\/(?:products?\/|sm\/pickup\/.+\/product\/)/i}
+    ];
+    const retailer=retailers.find(item=>host===item.domain||host.endsWith('.'+item.domain));
+    if(!retailer||!retailer.path.test(parsed.pathname))return {kind:'unsupported'};
+    return {kind:'supported',retailer:retailer.name,url:input};
+  }
+  function showLinkedProduct(retailer){
+    pendingLinkedProduct=retailer;
+    document.getElementById('linkedRetailer').textContent=retailer.retailer;
+    const productUrl=document.getElementById('linkedProductUrl');
+    productUrl.href=retailer.url;
+    productUrl.textContent=retailer.url;
+    linkedProductName.value='';
+    linkedProductQuantity.value='1';
+    linkedProductCard.hidden=false;
+  }
+  linkedProductForm.addEventListener('submit',event=>{
+    event.preventDefault();
+    if(!pendingLinkedProduct)return;
+    const name=linkedProductName.value.trim();
+    const quantity=Number(linkedProductQuantity.value);
+    if(!name){linkedProductName.focus();return;}
+    if(!Number.isSafeInteger(quantity)||quantity<1){linkedProductQuantity.focus();return;}
+    let item=cart.find(entry=>entry.product.url===pendingLinkedProduct.url);
+    if(item){item.quantity+=quantity;}
+    else{
+      const product={name,size:'',retailer:pendingLinkedProduct.retailer,price:null,url:pendingLinkedProduct.url,source:'customer-link'};
+      item={product,quantity};
+      cart.push(item);
+    }
+    const summary=`${item.product.name} added from ${pendingLinkedProduct.retailer}. Cart quantity: ${item.quantity}. Price pending; subtotal excludes this product.`;
+    pendingLinkedProduct=null;
+    linkedProductCard.hidden=true;
+    updateCart();
+    cartFeedback.textContent=summary;
+    cartFeedback.hidden=false;
+    scoutStatus.textContent='Product reference added to the demo cart. Its price has not been checked.';
+  });
+  searchInput.addEventListener('input',()=>{
+    if(!linkedProductCard.hidden){linkedProductCard.hidden=true;pendingLinkedProduct=null;}
+  });
+  viewCartButton.addEventListener('click',()=>{
+    cartFeedback.hidden=true;
+    updateCart();
+    scoutSection.hidden=true;
+    cartReview.hidden=false;
+    viewCartButton.setAttribute('aria-expanded','true');
+    cartReviewHeading.focus();
+  });
+  document.querySelectorAll('.continue-shopping').forEach(button=>button.addEventListener('click',()=>{
+    cartReview.hidden=true;
+    scoutSection.hidden=false;
+    viewCartButton.setAttribute('aria-expanded','false');
+    document.getElementById('itemSearch').focus();
+  }));
+  updateCart();
+  function normalize(value){return value.toLocaleLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,' ').trim();}
+  function renderScoutResults(matches){
+    scoutResults.replaceChildren();
+    matches.forEach(product=>{
+      const card=document.createElement('article');
+      card.className='scout-product';
+      const title=document.createElement('h4');title.textContent=product.name;
+      const size=document.createElement('p');size.textContent='Size: '+product.size;
+      const retailer=document.createElement('p');retailer.textContent='Retailer: '+product.retailer;
+      const category=document.createElement('p');category.className='muted';category.textContent=product.category;
+      const price=document.createElement('p');price.className='demo-price-label';price.textContent='DEMO PRICE: $'+product.price.toFixed(2);
+      const addButton=document.createElement('button');addButton.type='button';addButton.className='secondary scout-add-button';addButton.textContent='Add to Demo Cart';addButton.setAttribute('aria-label',`Add ${product.name}, ${product.size}, from ${product.retailer} to the demo cart`);addButton.addEventListener('click',()=>addToCart(product));
+      card.append(title,size,retailer,category,price,addButton);
+      scoutResults.appendChild(card);
+    });
+    scoutResult.hidden=matches.length===0;
+  }
+  searchForm.addEventListener('submit',event=>{
+    event.preventDefault();
+    const linkResult=linkedRetailerFor(searchInput.value);
+    if(linkResult.kind==='supported'){
+      renderScoutResults([]);
+      showLinkedProduct({retailer:linkResult.retailer,url:linkResult.url});
+      scoutStatus.textContent='Retailer product link recognized. This page does not check it. Add a sample name and quantity to see the pending-price demo.';
+      linkedProductName.focus();
+      return;
+    }
+    if(linkResult.kind==='invalid'||linkResult.kind==='unsupported'){
+      linkedProductCard.hidden=true;
+      pendingLinkedProduct=null;
+      renderScoutResults([]);
+      scoutStatus.textContent=linkResult.kind==='invalid'?'That link is invalid or does not use HTTPS. Paste a complete HTTPS product link from a supported retailer.':'Scout can accept product links only from Canadian Tire, Walmart, or Save-On-Foods product pages. Try a demonstration catalogue search instead.';
+      return;
+    }
+    linkedProductCard.hidden=true;
+    pendingLinkedProduct=null;
+    const query=normalize(searchInput.value);
+    if(!query){renderScoutResults([]);scoutStatus.textContent='Enter a product, size, retailer, or category to search the demonstration catalogue.';searchInput.focus();return;}
+    const words=query.split(/\s+/).filter(Boolean);
+    const matches=catalogue.map((product,index)=>{
+      const name=normalize(product.name),size=normalize(product.size),retailer=normalize(product.retailer);
+      const searchable=normalize([product.name,product.size,product.retailer,product.category,product.terms].join(' '));
+      if(!words.every(word=>searchable.includes(word)))return null;
+      const score=words.reduce((total,word)=>total+(name.includes(word)?5:0)+(size.includes(word)?3:0)+(retailer.includes(word)?2:0)+1,0)+(name.includes(query)?10:0);
+      return {product,index,score};
+    }).filter(Boolean).sort((a,b)=>b.score-a.score||a.index-b.index).slice(0,3).map(match=>match.product);
+    renderScoutResults(matches);
+    scoutStatus.textContent=matches.length?`${matches.length} demonstration ${matches.length===1?'option':'options'} found. Prices are for demonstration only.`:`No demonstration products matched “${searchInput.value.trim()}”. Try another product or category.`;
+  });
+})();
+</script>
+</body>
+</html>
